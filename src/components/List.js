@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const List = () => {
+const List = (props) => {
   const [state, setState] = React.useState({
     checked: false
   });
@@ -26,27 +26,31 @@ const List = () => {
     setState({ ...state, [name]: event.target.checked });
   };
 
+  const checkProps = () => Object.entries(props).length !== 0 && props.constructor === Object;
+
   return (
     <div className={classes.root}>
       <Typography variant="h5" component="h2">
         List:
       </Typography>
-      <FormControl className={classes.form} component="fieldset">
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.checked}
-              onChange={handleChange('checked')}
-              value={state.checked}
-              color="primary"
-            />
-          }
-          label="Walk the dog"
-        />
-        <IconButton aria-label="delete" className={classes.margin}>
-          <DeleteIcon fontSize="small" />
-        </IconButton>
-      </FormControl>
+      {checkProps() && props.items.map((item) => (
+        <FormControl key={item.id} className={classes.form} component="fieldset">
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checked}
+                onChange={handleChange('checked')}
+                value={item.name}
+                color="primary"
+              />
+            }
+            label={item.name}
+          />
+          <IconButton aria-label="delete" className={classes.margin}>
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        </FormControl>
+      ))}
     </div>
   );
 };

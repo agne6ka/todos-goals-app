@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import List from "./List";
+import {connect} from "react-redux";
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Goals = () => {
+const Goals = (props) => {
   const classes = useStyles();
 
   return (
@@ -28,9 +29,13 @@ const Goals = () => {
           variant="filled"
         />
       </form>
-      <List/>
+      <List
+        items={props.goals}
+      />
     </div>
   );
 };
 
-export default Goals;
+export default connect((state) => ({
+  goals: state.goals
+}))(Goals)
