@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Goals = (props) => {
+function Goals (props) {
   const classes = useStyles();
 
   return (
@@ -34,7 +34,7 @@ const Goals = (props) => {
       />
     </div>
   );
-};
+}
 
 export default connect((state) => ({
   goals: state.goals

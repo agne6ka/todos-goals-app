@@ -4,7 +4,7 @@ import {
 
 export default function goals (state = [], action) {
   switch(action.type) {
-    case RECEIVE_DATA :
+    case RECEIVE_DATA:
       return action.goals;
     default :
       return state

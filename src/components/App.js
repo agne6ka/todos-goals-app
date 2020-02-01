@@ -22,7 +22,7 @@ class App extends React.Component {
         <Container maxWidth="lg">
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography variant="h4" component="h2">
+              <Typography className="center" variant="h4" component="h2">
                 Organize better by adding todos&nbsp;and&nbsp;goals.
               </Typography>
             </Grid>
