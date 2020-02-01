@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import {handleAddGoal, handleRemoveGoal} from "../actions/goals";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -17,15 +18,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 const List = (props) => {
-  const [state, setState] = React.useState({
-    checked: false
-  });
+  const [state, setState] = React.useState({checked: false});
   const classes = useStyles();
-
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
-
   const checkProps = () => Object.entries(props).length !== 0 && props.constructor === Object;
 
   return (
@@ -46,7 +43,7 @@ const List = (props) => {
             }
             label={item.name}
           />
-          <IconButton aria-label="delete" className={classes.margin}>
+          <IconButton onClick={() => {props.remove(item)}} aria-label="delete" className={classes.margin}>
             <DeleteIcon fontSize="small" />
           </IconButton>
         </FormControl>

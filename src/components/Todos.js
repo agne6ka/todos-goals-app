@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux'
 import List from "./List";
-import { handleAddTodo } from '../actions/todos'
+import { handleAddTodo, handleRemoveTodo } from '../actions/todos'
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -25,6 +25,9 @@ const Todos = (props) => {
       () => setText('')
     ))
   };
+  const removeItem = (todo) => {
+    props.dispatch(handleRemoveTodo(todo))
+  };
   return (
     <div>
       <form onSubmit={addItem} className={classes.form} noValidate autoComplete="off">
@@ -38,6 +41,7 @@ const Todos = (props) => {
       </form>
       <List
         items={props.todos}
+        remove={removeItem}
       />
     </div>
   );

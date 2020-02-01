@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import List from "./List";
 import {connect} from "react-redux";
-import {handleAddGoal} from '../actions/goals'
+import {handleAddGoal, handleRemoveGoal} from '../actions/goals'
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -29,6 +29,9 @@ function Goals(props) {
       () => setText('')
     ))
   };
+  const removeItem = (goal) => {
+    props.dispatch(handleRemoveGoal(goal))
+  };
   return (
     <div>
       <form onSubmit={addItem} className={classes.form} noValidate autoComplete="off">
@@ -43,6 +46,7 @@ function Goals(props) {
       </form>
       <List
         items={props.goals}
+        remove={removeItem}
       />
     </div>
   );
